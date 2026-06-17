@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  USER
+  ADMIN
+  AGENCY_OWNER
+}
+
+enum Plan {
+  FREE
+  PRO
+  AGENCY
+}
+
+enum ScriptStatus {
+  DRAFT
+  READY
+  PUBLISHED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String?
+  role      Role     @default(USER)
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clients   Client[]
+  scripts   Script[]
+}
+
+model Client {
+  id             String   @id @default(uuid())
+  name           String
+  niche          String?
+  platforms      String? // e.g., "Instagram, YouTube"
+  defaultLanguage String?  // e.g., "Marathi"
+  defaultTone    String?  // e.g., "Funny"
+  contactPerson  String?
+  status         String   @default("active") // active, paused
+
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+
+  scripts        Script[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Script {
+  id          String       @id @default(uuid())
+  topic       String
+  content     String
+  caption     String?
+  hashtags    String?
+  platforms   String?
+  status      ScriptStatus @default(DRAFT)
+
+  // A script can belong directly to a user or to an agency's client
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  
+  clientId    String?
+  client      Client?      @relation(fields: [clientId], references: [id])
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
