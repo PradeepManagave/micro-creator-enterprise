@@ -1,17 +1,10 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-background: #f9fafb;
+  --color-foreground: #111827;
   
-  /* Missing Custom Design Tokens */
+  /* Custom Design Tokens */
   --color-primary: #4F46E5;
   --color-primary-container: #EEF2FF;
   --color-on-primary-container: #4338CA;
@@ -21,18 +14,17 @@
   --color-success-tint: #DCFCE7;
   --color-tertiary: #15803D;
   --color-info-tint: #DBEAFE;
-  --color-surface-container-low: #F9FAFB;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface-container-low: #F3F4F6;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Force standard colors for cards to prevent dark mode invisiblity */
+.bg-white {
+  background-color: #ffffff !important;
+  color: #111827;
 }
