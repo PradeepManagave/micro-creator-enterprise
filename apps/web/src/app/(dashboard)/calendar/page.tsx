@@ -1,7 +1,7 @@
 export default async function CalendarPage() {
   let schedule = [];
   try {
-    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/calendar', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/calendar`, { cache: 'no-store' });
     if (res.ok) schedule = await res.json();
   } catch (err) {}
 

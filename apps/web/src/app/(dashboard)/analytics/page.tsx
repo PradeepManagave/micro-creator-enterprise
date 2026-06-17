@@ -1,7 +1,7 @@
 export default async function AnalyticsPage() {
   let stats = { totalScripts: 0, estimatedViews: 0, engagementRate: 0 };
   try {
-    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts/analytics', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts/analytics`, { cache: 'no-store' });
     if (res.ok) {
       stats = await res.json();
     }

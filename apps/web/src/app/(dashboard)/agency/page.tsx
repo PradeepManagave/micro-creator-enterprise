@@ -4,7 +4,7 @@ import AddClientModal from './AddClientModal';
 export default async function AgencyPage() {
   let clients = [];
   try {
-    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/clients', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/clients`, { cache: 'no-store' });
     if (res.ok) {
       clients = await res.json();
     }

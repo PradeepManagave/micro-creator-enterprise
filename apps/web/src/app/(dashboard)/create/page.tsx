@@ -17,7 +17,7 @@ function CreateForm() {
       const payload: any = { topic, platforms: 'Instagram', language: defaultLang };
       if (defaultClientId) payload.clientId = defaultClientId;
 
-      const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

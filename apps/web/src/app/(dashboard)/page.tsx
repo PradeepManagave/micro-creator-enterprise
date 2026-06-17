@@ -1,7 +1,7 @@
 export default async function DashboardPage() {
   let scripts = [];
   try {
-    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/scripts`, { cache: 'no-store' });
     if (res.ok) {
       scripts = await res.json();
     }

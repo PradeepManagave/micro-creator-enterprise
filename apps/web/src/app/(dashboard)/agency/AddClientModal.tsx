@@ -20,7 +20,7 @@ export default function AddClientModal() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/clients', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/clients`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

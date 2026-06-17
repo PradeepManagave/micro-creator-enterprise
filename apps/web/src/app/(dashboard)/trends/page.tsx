@@ -1,7 +1,7 @@
 export default async function TrendsPage() {
   let trends = [];
   try {
-    const res = await fetch('${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/trends', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/trends`, { cache: 'no-store' });
     if (res.ok) trends = await res.json();
   } catch (err) {}
 
