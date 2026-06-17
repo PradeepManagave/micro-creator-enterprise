@@ -22,8 +22,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Prisma Client and build
-RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
+# Build the project (Turbo will automatically run prisma generate via apps/api package.json)
 RUN npx turbo run build
 
 # Production image for Backend API
