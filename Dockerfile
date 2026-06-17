@@ -23,7 +23,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build the project (Turbo will automatically run prisma generate via apps/api package.json)
-RUN npx turbo run build
+RUN npx turbo run build --filter=api
 
 # Production image for Backend API
 FROM base AS runner
