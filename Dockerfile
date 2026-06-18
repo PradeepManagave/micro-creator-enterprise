@@ -9,6 +9,9 @@ COPY . .
 # Run full install to ensure workspace symlinks and Prisma binaries are perfectly generated for Alpine
 RUN npm install
 
+# Provide a dummy DATABASE_URL so Prisma generate does not fail validation during Docker build
+ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
+
 # Build the API explicitly
 RUN cd apps/api && npx prisma generate && npx nest build
 
