@@ -21,8 +21,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the project (Turbo will automatically run prisma generate via apps/api package.json)
-RUN npx turbo run build --filter=api
+# Build the project API directly using npm workspaces to avoid Turbo binary issues on Alpine
+RUN npm run build --workspace=api
 
 # Production image for Backend API
 FROM base AS runner
