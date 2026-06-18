@@ -1,28 +1,16 @@
 FROM node:20-alpine AS base
 RUN apk add --no-cache openssl libc6-compat
 
-# Install dependencies only when needed
-FROM base AS deps
-WORKDIR /app
-
-# Install turbo
-RUN npm install -g turbo
-
-COPY package.json package-lock.json ./
-COPY turbo.json ./
-COPY apps/api/package.json ./apps/api/
-COPY apps/web/package.json ./apps/web/
-
-RUN npm install
 
 # Build the project
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Run full install to ensure workspace symlinks and Prisma binaries are perfectly generated for Alpine
+RUN npm install
 
-# Build the project API directly using npm workspaces to avoid Turbo binary issues on Alpine
-RUN npm run build --workspace=api
+# Build the API explicitly
+RUN cd apps/api && npx prisma generate && npx nest build
 
 # Production image for Backend API
 FROM base AS runner
