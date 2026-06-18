@@ -31,4 +31,4 @@ COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
 EXPOSE 3001
 
 # Command to run the backend API
-CMD ["sh", "-c", "npx prisma db push --schema=apps/api/prisma/schema.prisma --accept-data-loss && node apps/api/dist/main.js"]
+CMD ["sh", "-c", "cd apps/api && npx prisma db push --accept-data-loss && cd /app && node apps/api/dist/main.js"]
