@@ -27,4 +27,4 @@ COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
 EXPOSE 3001
 
 # Command to run the backend API
-CMD ["node", "apps/api/dist/main.js"]
+CMD ["node", "apps/api/dist/src/main.js"]
